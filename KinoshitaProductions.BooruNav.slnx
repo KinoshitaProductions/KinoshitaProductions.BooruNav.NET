@@ -1,0 +1,11 @@
+﻿<Solution>
+  <Project Path="KinoshitaProductions.BooruNav.Android/KinoshitaProductions.BooruNav.Android.csproj">
+    <Deploy />
+  </Project>
+  <Project Path="KinoshitaProductions.BooruNav.Browser/KinoshitaProductions.BooruNav.Browser.csproj" />
+  <Project Path="KinoshitaProductions.BooruNav.Desktop/KinoshitaProductions.BooruNav.Desktop.csproj" />
+  <Project Path="KinoshitaProductions.BooruNav.iOS/KinoshitaProductions.BooruNav.iOS.csproj">
+    <Deploy />
+  </Project>
+  <Project Path="KinoshitaProductions.BooruNav/KinoshitaProductions.BooruNav.csproj" />
+</Solution>
