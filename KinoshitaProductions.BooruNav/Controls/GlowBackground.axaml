@@ -1,0 +1,76 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="using:KinoshitaProductions.BooruNav.Controls">
+
+    <Styles.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.ThemeDictionaries>
+                <ResourceDictionary x:Key="Light">
+                    <Color x:Key="GlowAccent1">#3F8FE0</Color>
+                    <Color x:Key="GlowAccent2">#9B6BE0</Color>
+                    <Color x:Key="GlowAccent3">#40C0A0</Color>
+                </ResourceDictionary>
+                <ResourceDictionary x:Key="Dark">
+                    <Color x:Key="GlowAccent1">#4FB0FF</Color>
+                    <Color x:Key="GlowAccent2">#B36BFF</Color>
+                    <Color x:Key="GlowAccent3">#45E0C0</Color>
+                </ResourceDictionary>
+            </ResourceDictionary.ThemeDictionaries>
+        </ResourceDictionary>
+    </Styles.Resources>
+
+    <!-- Theme-aware default accents; instances can override any inline. -->
+    <Style Selector="controls|GlowBackground">
+        <Setter Property="Accent1" Value="{DynamicResource GlowAccent1}"/>
+        <Setter Property="Accent2" Value="{DynamicResource GlowAccent2}"/>
+        <Setter Property="Accent3" Value="{DynamicResource GlowAccent3}"/>
+    </Style>
+
+    <!-- Slow drift. Different, non-divisible durations so the pattern never visibly repeats.
+         Animate TranslateTransform.X/Y (double animators) — Avalonia has no animator for
+         the RenderTransform property itself. -->
+    <Style Selector="controls|GlowBackground > Ellipse.glow0">
+        <Style.Animations>
+            <Animation Duration="0:0:13" IterationCount="INFINITE" PlaybackDirection="Alternate" Easing="SineEaseInOut">
+                <KeyFrame Cue="0%">
+                    <Setter Property="TranslateTransform.X" Value="-160"/>
+                    <Setter Property="TranslateTransform.Y" Value="-120"/>
+                </KeyFrame>
+                <KeyFrame Cue="100%">
+                    <Setter Property="TranslateTransform.X" Value="150"/>
+                    <Setter Property="TranslateTransform.Y" Value="90"/>
+                </KeyFrame>
+            </Animation>
+        </Style.Animations>
+    </Style>
+
+    <Style Selector="controls|GlowBackground > Ellipse.glow1">
+        <Style.Animations>
+            <Animation Duration="0:0:19" IterationCount="INFINITE" PlaybackDirection="Alternate" Easing="SineEaseInOut">
+                <KeyFrame Cue="0%">
+                    <Setter Property="TranslateTransform.X" Value="140"/>
+                    <Setter Property="TranslateTransform.Y" Value="100"/>
+                </KeyFrame>
+                <KeyFrame Cue="100%">
+                    <Setter Property="TranslateTransform.X" Value="-130"/>
+                    <Setter Property="TranslateTransform.Y" Value="-80"/>
+                </KeyFrame>
+            </Animation>
+        </Style.Animations>
+    </Style>
+
+    <Style Selector="controls|GlowBackground > Ellipse.glow2">
+        <Style.Animations>
+            <Animation Duration="0:0:23" IterationCount="INFINITE" PlaybackDirection="Alternate" Easing="SineEaseInOut">
+                <KeyFrame Cue="0%">
+                    <Setter Property="TranslateTransform.X" Value="40"/>
+                    <Setter Property="TranslateTransform.Y" Value="-150"/>
+                </KeyFrame>
+                <KeyFrame Cue="100%">
+                    <Setter Property="TranslateTransform.X" Value="-60"/>
+                    <Setter Property="TranslateTransform.Y" Value="150"/>
+                </KeyFrame>
+            </Animation>
+        </Style.Animations>
+    </Style>
+</Styles>

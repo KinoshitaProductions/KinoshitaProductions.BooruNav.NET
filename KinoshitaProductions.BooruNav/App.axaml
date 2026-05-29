@@ -11,5 +11,6 @@
 
     <Application.Styles>
         <FluentTheme />
+        <StyleInclude Source="avares://KinoshitaProductions.BooruNav/Controls/GlowBackground.axaml"/>
     </Application.Styles>
 </Application>
