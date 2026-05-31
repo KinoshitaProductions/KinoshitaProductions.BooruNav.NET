@@ -62,3 +62,6 @@ nunit-*.xml
 
 # IDE
 .idea
+
+# Local Android notes (testing)
+KinoshitaProductions.BooruNav.Android/CLAUDE.md
