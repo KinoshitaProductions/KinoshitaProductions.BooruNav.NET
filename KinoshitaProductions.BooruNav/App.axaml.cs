@@ -63,6 +63,7 @@ public partial class App : Application
         // CommunityToolkit's messenger is the broadcast channel for ViewportChanged.
         services.AddSingleton<IMessenger>(WeakReferenceMessenger.Default);
         services.AddSingleton<IViewportService, ViewportService>();
+        services.AddSingleton<IThemeService, ThemeService>();
 
         services.AddTransient<MainViewModel>();
         services.AddTransient<DeviceSwitcherViewModel>();

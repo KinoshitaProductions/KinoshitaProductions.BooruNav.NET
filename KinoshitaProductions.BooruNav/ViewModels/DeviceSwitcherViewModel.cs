@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using Avalonia.Styling;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Messaging;
 using KinoshitaProductions.BooruNav.Presentation;
@@ -14,6 +15,7 @@ namespace KinoshitaProductions.BooruNav.ViewModels;
 public partial class DeviceSwitcherViewModel : ViewModelBase, IRecipient<ViewportChanged>
 {
     private readonly IViewportService _viewport;
+    private readonly IThemeService _theme;
     private bool _suppress;
 
     public IReadOnlyList<DevicePreset> Presets => DevicePreset.All;
@@ -27,14 +29,21 @@ public partial class DeviceSwitcherViewModel : ViewModelBase, IRecipient<Viewpor
     [ObservableProperty]
     private string _summary = string.Empty;
 
-    public DeviceSwitcherViewModel(IViewportService viewport, IMessenger messenger)
+    [ObservableProperty]
+    private ThemeVariant _selectedTheme;
+
+    public DeviceSwitcherViewModel(IViewportService viewport, IThemeService theme, IMessenger messenger)
     {
         _viewport = viewport;
+        _theme = theme;
         _selectedPreset = Match(viewport.Current) ?? Presets[0];
         _isLandscape = viewport.Current.Orientation == ScreenOrientation.Landscape;
         _summary = Describe(viewport.Current);
+        _selectedTheme = theme.Current;
         messenger.Register<DeviceSwitcherViewModel, ViewportChanged>(this, static (vm, m) => vm.Receive(m));
     }
+
+    partial void OnSelectedThemeChanged(ThemeVariant value) => _theme.Request(value);
 
     partial void OnSelectedPresetChanged(DevicePreset value)
     {
