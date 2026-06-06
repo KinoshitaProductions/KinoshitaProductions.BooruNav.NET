@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!-- Common test config (TFM, xUnit v3, Shouldly, coverlet) comes from ..\Directory.Build.props -->
+  <ItemGroup>
+    <PackageReference Include="NSubstitute" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\KinoshitaProductions.BooruNav\KinoshitaProductions.BooruNav.csproj" />
+  </ItemGroup>
+
+</Project>

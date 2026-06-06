@@ -1,4 +1,9 @@
-﻿<Solution>
+<Solution>
+  <Folder Name="/Tests/">
+    <Project Path="KinoshitaProductions.BooruNav.E2ETests/KinoshitaProductions.BooruNav.E2ETests.csproj" />
+    <Project Path="KinoshitaProductions.BooruNav.UiTests/KinoshitaProductions.BooruNav.UiTests.csproj" />
+    <Project Path="KinoshitaProductions.BooruNav.UnitTests/KinoshitaProductions.BooruNav.UnitTests.csproj" />
+  </Folder>
   <Project Path="KinoshitaProductions.BooruNav.Android/KinoshitaProductions.BooruNav.Android.csproj">
     <Deploy />
   </Project>
