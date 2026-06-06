@@ -1,0 +1,15 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:KinoshitaProductions.BooruNav.ViewModels"
+             x:Class="KinoshitaProductions.BooruNav.Views.SplashView"
+             x:DataType="vm:SplashViewModel">
+    <Design.DataContext>
+        <vm:SplashViewModel/>
+    </Design.DataContext>
+
+    <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Spacing="18">
+        <TextBlock Text="BooruNav" FontSize="34" FontWeight="Bold" HorizontalAlignment="Center"/>
+        <ProgressBar IsIndeterminate="True" Width="180"/>
+        <TextBlock Text="{Binding Message}" Opacity="0.7" HorizontalAlignment="Center"/>
+    </StackPanel>
+</UserControl>

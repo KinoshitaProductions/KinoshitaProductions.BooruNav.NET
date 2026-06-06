@@ -13,8 +13,8 @@ to set the actual DataContext for runtime, set the DataContext property in code 
         <vm:MainViewModel />
     </Design.DataContext>
 
+    <!-- GlowBackground now lives in ShellView so the animation persists across page transitions. -->
     <Panel>
-        <controls:GlowBackground/>
         <TextBlock Text="{Binding Greeting}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
     </Panel>
 </UserControl>

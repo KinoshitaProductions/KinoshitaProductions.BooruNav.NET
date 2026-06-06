@@ -14,7 +14,7 @@
         <!-- Mode="Desktop" fills the window; "Mobile" letterboxes into a phone viewport.
              These attributes only seed the initial state — IViewportService is the source of truth. -->
         <controls:ViewportHost Mode="Mobile" Aspect="20:9">
-            <views:MainView />
+            <views:ShellView />
         </controls:ViewportHost>
 
         <!-- Runtime device switcher, gated by App.ShowDeviceSwitcher (a bool for now). -->

@@ -35,25 +35,23 @@ public partial class App : Application
         ConfigureServices(services);
         Services = services.BuildServiceProvider();
 
+        var shell = Services.GetRequiredService<ShellViewModel>();
+
         if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
         {
-            desktop.MainWindow = new MainWindow
-            {
-                DataContext = Services.GetRequiredService<MainViewModel>(),
-            };
+            desktop.MainWindow = new MainWindow { DataContext = shell };
         }
         else if (ApplicationLifetime is IActivityApplicationLifetime singleViewFactoryApplicationLifetime)
         {
-            singleViewFactoryApplicationLifetime.MainViewFactory =
-                () => new MainView { DataContext = Services.GetRequiredService<MainViewModel>() };
+            singleViewFactoryApplicationLifetime.MainViewFactory = () => new ShellView { DataContext = shell };
         }
         else if (ApplicationLifetime is ISingleViewApplicationLifetime singleViewPlatform)
         {
-            singleViewPlatform.MainView = new MainView
-            {
-                DataContext = Services.GetRequiredService<MainViewModel>(),
-            };
+            singleViewPlatform.MainView = new ShellView { DataContext = shell };
         }
+
+        // Splash is already shown (set in the shell ctor); kick off warmup, then it routes itself.
+        _ = shell.InitializeAsync();
 
         base.OnFrameworkInitializationCompleted();
     }
@@ -64,7 +62,11 @@ public partial class App : Application
         services.AddSingleton<IMessenger>(WeakReferenceMessenger.Default);
         services.AddSingleton<IViewportService, ViewportService>();
         services.AddSingleton<IThemeService, ThemeService>();
+        services.AddSingleton<IAppState, AppState>();
 
+        services.AddSingleton<ShellViewModel>();
+        services.AddTransient<SplashViewModel>();
+        services.AddTransient<WelcomeViewModel>();
         services.AddTransient<MainViewModel>();
         services.AddTransient<DeviceSwitcherViewModel>();
     }

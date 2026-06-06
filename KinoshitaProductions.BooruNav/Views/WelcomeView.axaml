@@ -1,0 +1,41 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:KinoshitaProductions.BooruNav.ViewModels"
+             x:Class="KinoshitaProductions.BooruNav.Views.WelcomeView"
+             x:DataType="vm:WelcomeViewModel">
+    <!-- No Design.DataContext: WelcomeViewModel takes IMessenger; x:DataType drives bindings. -->
+    <DockPanel Margin="24">
+        <!-- Footer: Skip · step label · Back · Next/Get-started -->
+        <Grid DockPanel.Dock="Bottom" ColumnDefinitions="Auto,*,Auto,Auto" Margin="0,16,0,0">
+            <Button Grid.Column="0" Content="Skip" Command="{Binding SkipCommand}"/>
+            <TextBlock Grid.Column="1" Text="{Binding StepLabel}"
+                       HorizontalAlignment="Center" VerticalAlignment="Center" Opacity="0.7"/>
+            <Button Grid.Column="2" Content="Back" Command="{Binding BackCommand}" Margin="0,0,8,0"/>
+            <Button Grid.Column="3" Content="Next" Command="{Binding NextCommand}"
+                    IsVisible="{Binding !IsLastStep}"/>
+            <Button Grid.Column="3" Content="Get started" Classes="accent"
+                    Command="{Binding FinishCommand}" IsVisible="{Binding IsLastStep}"/>
+        </Grid>
+
+        <Carousel SelectedIndex="{Binding StepIndex}">
+            <Carousel.PageTransition>
+                <PageSlide Duration="0:0:0.25" Orientation="Horizontal"/>
+            </Carousel.PageTransition>
+
+            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Spacing="10">
+                <TextBlock Text="Welcome to BooruNav" FontSize="24" FontWeight="Bold" HorizontalAlignment="Center"/>
+                <TextBlock Text="Browse and navigate boorus with ease." Opacity="0.8" HorizontalAlignment="Center"/>
+            </StackPanel>
+
+            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Spacing="10">
+                <TextBlock Text="Your way" FontSize="24" FontWeight="Bold" HorizontalAlignment="Center"/>
+                <TextBlock Text="Pick a theme and layout that suits you." Opacity="0.8" HorizontalAlignment="Center"/>
+            </StackPanel>
+
+            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Spacing="10">
+                <TextBlock Text="All set" FontSize="24" FontWeight="Bold" HorizontalAlignment="Center"/>
+                <TextBlock Text="You're ready to go." Opacity="0.8" HorizontalAlignment="Center"/>
+            </StackPanel>
+        </Carousel>
+    </DockPanel>
+</UserControl>

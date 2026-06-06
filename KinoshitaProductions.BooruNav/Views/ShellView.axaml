@@ -1,0 +1,13 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:KinoshitaProductions.BooruNav.ViewModels"
+             xmlns:controls="using:KinoshitaProductions.BooruNav.Controls"
+             x:Class="KinoshitaProductions.BooruNav.Views.ShellView"
+             x:DataType="vm:ShellViewModel">
+    <!-- No Design.DataContext: ShellViewModel has DI-only constructor deps; x:DataType drives bindings. -->
+    <Panel>
+        <!-- Shared animated backdrop: persists across splash → welcome → main transitions. -->
+        <controls:GlowBackground/>
+        <TransitioningContentControl Content="{Binding Current}"/>
+    </Panel>
+</UserControl>
