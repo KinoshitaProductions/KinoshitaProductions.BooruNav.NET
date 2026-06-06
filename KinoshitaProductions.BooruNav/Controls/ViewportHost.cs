@@ -1,7 +1,6 @@
 using System;
 using Avalonia;
 using Avalonia.Controls;
-using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Media;
 using CommunityToolkit.Mvvm.Messaging;
 using KinoshitaProductions.BooruNav.Presentation;
@@ -95,18 +94,12 @@ public sealed class ViewportHost : Decorator
     /// <summary>The viewport to render. Falls back to the local seed when there is no service (previewer).</summary>
     private Viewport Current => _service?.Current ?? BuildSeedViewport();
 
-    private bool Emulating
-    {
-        get
-        {
-            if (Current.Mode != FormFactor.Mobile)
-                return false;
+    // The only place a phone viewport should NOT be letterboxed is an actual phone, where the
+    // single-view shell already fills the screen. Everywhere else (desktop, browser, previewer,
+    // headless tests) emulation is the whole point.
+    private static bool IsRealMobileDevice => OperatingSystem.IsAndroid() || OperatingSystem.IsIOS();
 
-            // Letterbox only where a phone wouldn't already fill the screen: desktop windows + the previewer.
-            var isDesktop = Application.Current?.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime;
-            return isDesktop || Design.IsDesignMode;
-        }
-    }
+    private bool Emulating => Current.Mode == FormFactor.Mobile && !IsRealMobileDevice;
 
     private Size ResolveDeviceSize()
     {

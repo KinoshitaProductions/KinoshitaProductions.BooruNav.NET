@@ -1,0 +1,32 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:KinoshitaProductions.BooruNav.ViewModels"
+             xmlns:presentation="using:KinoshitaProductions.BooruNav.Presentation"
+             x:Class="KinoshitaProductions.BooruNav.Controls.DeviceSwitcher"
+             x:DataType="vm:DeviceSwitcherViewModel">
+    <Border Background="#CC1E1E1E"
+            CornerRadius="8"
+            Padding="10"
+            BoxShadow="0 2 12 0 #80000000">
+        <StackPanel Spacing="6" MinWidth="190">
+            <TextBlock Text="Device preview" FontWeight="SemiBold" FontSize="12" Opacity="0.85"/>
+
+            <ComboBox ItemsSource="{Binding Presets}"
+                      SelectedItem="{Binding SelectedPreset}"
+                      HorizontalAlignment="Stretch">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate x:DataType="presentation:DevicePreset">
+                        <TextBlock Text="{Binding Name}"/>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+
+            <ToggleButton Content="Landscape"
+                          IsChecked="{Binding IsLandscape}"
+                          HorizontalAlignment="Stretch"
+                          HorizontalContentAlignment="Center"/>
+
+            <TextBlock Text="{Binding Summary}" FontSize="11" Opacity="0.7"/>
+        </StackPanel>
+    </Border>
+</UserControl>

@@ -5,13 +5,22 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:views="using:KinoshitaProductions.BooruNav.Views"
         xmlns:controls="using:KinoshitaProductions.BooruNav.Controls"
+        xmlns:app="using:KinoshitaProductions.BooruNav"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="KinoshitaProductions.BooruNav.Views.MainWindow"
         Icon="/Assets/avalonia-logo.ico"
         Title="KinoshitaProductions.BooruNav">
-        <!-- Mode="Desktop" fills the window; switch to "Mobile" to letterbox into a phone viewport.
+    <Panel>
+        <!-- Mode="Desktop" fills the window; "Mobile" letterboxes into a phone viewport.
              These attributes only seed the initial state — IViewportService is the source of truth. -->
         <controls:ViewportHost Mode="Mobile" Aspect="20:9">
             <views:MainView />
         </controls:ViewportHost>
+
+        <!-- Runtime device switcher, gated by App.ShowDeviceSwitcher (a bool for now). -->
+        <controls:DeviceSwitcher HorizontalAlignment="Right"
+                                 VerticalAlignment="Top"
+                                 Margin="12"
+                                 IsVisible="{x:Static app:App.ShowDeviceSwitcher}"/>
+    </Panel>
 </Window>

@@ -18,6 +18,12 @@ public partial class App : Application
     /// </summary>
     public static IServiceProvider Services { get; private set; } = default!;
 
+    /// <summary>
+    /// Whether the runtime device-switcher overlay is shown. A plain switch for now — replace this
+    /// with a persisted user setting when one exists.
+    /// </summary>
+    public static bool ShowDeviceSwitcher { get; set; } = true;
+
     public override void Initialize()
     {
         AvaloniaXamlLoader.Load(this);
@@ -59,5 +65,6 @@ public partial class App : Application
         services.AddSingleton<IViewportService, ViewportService>();
 
         services.AddTransient<MainViewModel>();
+        services.AddTransient<DeviceSwitcherViewModel>();
     }
 }

@@ -1,0 +1,152 @@
+name: CI
+
+# Continuous integration for the BooruNav Avalonia app.
+#
+# Why per-project `dotnet` commands instead of building the solution (.slnx)?
+# The solution also contains the Android, iOS and Browser app heads, which need
+# extra .NET workloads (android / ios / wasm-tools) that we deliberately do NOT
+# install on CI. Building the whole solution would therefore fail. Every step
+# below targets a specific test .csproj, each of which only references the shared
+# core project (KinoshitaProductions.BooruNav) — never an app head — so the build
+# graph stays workload-free. This is verified: a per-project build of any test
+# project restores/builds only `core + that test project`.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+# Cancel superseded runs on the same ref to save CI minutes.
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+env:
+  DOTNET_VERSION: "10.0.x"
+  # Quieter, more deterministic CI builds.
+  DOTNET_NOLOGO: "true"
+  DOTNET_CLI_TELEMETRY_OPTOUT: "true"
+  DOTNET_SKIP_FIRST_TIME_EXPERIENCE: "true"
+  CONFIGURATION: Release
+
+jobs:
+  # ---------------------------------------------------------------------------
+  # Fast suites: pure logic + Avalonia headless (no native deps, no workloads).
+  # Run as a matrix so each project is restored/built/tested in isolation and in
+  # parallel; fail-fast is off so a failure in one suite still reports the others.
+  # ---------------------------------------------------------------------------
+  tests:
+    name: tests (${{ matrix.suite }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - suite: UnitTests
+            project: KinoshitaProductions.BooruNav.UnitTests/KinoshitaProductions.BooruNav.UnitTests.csproj
+          - suite: UiTests
+            project: KinoshitaProductions.BooruNav.UiTests/KinoshitaProductions.BooruNav.UiTests.csproj
+          - suite: E2ETests
+            project: KinoshitaProductions.BooruNav.E2ETests/KinoshitaProductions.BooruNav.E2ETests.csproj
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: ${{ env.DOTNET_VERSION }}
+          # Built-in NuGet cache; keyed on the lockfile-ish inputs below so the
+          # cache is reused while package versions are unchanged.
+          cache: true
+          cache-dependency-path: |
+            **/Directory.Packages.props
+            **/*.csproj
+
+      - name: Restore
+        run: dotnet restore "${{ matrix.project }}"
+
+      - name: Build
+        run: dotnet build "${{ matrix.project }}" --configuration "$CONFIGURATION" --no-restore
+
+      - name: Test
+        run: >-
+          dotnet test "${{ matrix.project }}"
+          --configuration "$CONFIGURATION"
+          --no-build
+          --collect:"XPlat Code Coverage"
+          --results-directory "TestResults/${{ matrix.suite }}"
+          --logger "trx;LogFileName=${{ matrix.suite }}.trx"
+
+      # Keep coverage (Cobertura) and TRX logs around for inspection / later
+      # publishing. Uploaded even on failure so red runs are still diagnosable.
+      - name: Upload test results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-results-${{ matrix.suite }}
+          path: TestResults/${{ matrix.suite }}/**
+          retention-days: 14
+          if-no-files-found: warn
+
+  # ---------------------------------------------------------------------------
+  # Screenshot suite: REAL Skia rasterization (not headless no-op drawing), so it
+  # needs fontconfig present at runtime. It asserts that rendering actually works
+  # and writes PNGs to artifacts/screenshots/. This job is expected to FAIL if the
+  # screenshot tests fail, but the artifact upload always runs so we can inspect
+  # whatever was produced.
+  # ---------------------------------------------------------------------------
+  screenshots:
+    name: screenshots
+    runs-on: ubuntu-latest
+    env:
+      # Where Screenshot.cs writes PNGs. Matches the project's built-in default
+      # (repo-root /artifacts/screenshots), set explicitly so the upload path and
+      # the test output can't drift apart.
+      SCREENSHOT_OUTPUT_DIR: ${{ github.workspace }}/artifacts/screenshots
+      SCREENSHOT_PROJECT: KinoshitaProductions.BooruNav.ScreenshotTests/KinoshitaProductions.BooruNav.ScreenshotTests.csproj
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: ${{ env.DOTNET_VERSION }}
+          cache: true
+          cache-dependency-path: |
+            **/Directory.Packages.props
+            **/*.csproj
+
+      # Skia needs fontconfig to resolve fonts when rasterizing real pixels.
+      # The headless suites above use no-op drawing and don't require this.
+      - name: Install native deps (fontconfig)
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends libfontconfig1
+
+      # Per-project build + run (same workload-free rationale as the `tests` job).
+      # On Ubuntu the apt-installed libfontconfig1 above is the only native dep
+      # Skia needs, so we drive dotnet directly. (A scripts/run-screenshots.sh
+      # helper exists mainly to wire native libs on non-Ubuntu/Nix dev boxes; it
+      # is unnecessary here and not relied upon by this job.)
+      - name: Build screenshot tests
+        run: dotnet build "$SCREENSHOT_PROJECT" --configuration "$CONFIGURATION"
+
+      - name: Generate screenshots
+        run: dotnet test "$SCREENSHOT_PROJECT" --configuration "$CONFIGURATION" --no-build
+
+      # Always attempt the upload — even on failure — so any frames that were
+      # rendered before an assertion failed are still available for review.
+      - name: Upload screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: screenshots
+          path: artifacts/screenshots/**
+          retention-days: 30
+          if-no-files-found: error
