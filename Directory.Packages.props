@@ -31,5 +31,7 @@
         <!-- Headless UI/E2E testing — keep in sync with the Avalonia version above. -->
         <PackageVersion Include="Avalonia.Headless" Version="12.0.4" />
         <PackageVersion Include="Avalonia.Headless.XUnit" Version="12.0.4" />
+        <!-- Real rasterization for screenshot capture (ScreenshotTests only). -->
+        <PackageVersion Include="Avalonia.Skia" Version="12.0.4" />
     </ItemGroup>
 </Project>

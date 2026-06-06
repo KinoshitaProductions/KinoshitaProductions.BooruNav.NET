@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!-- Common test config (TFM, xUnit v3, Shouldly, coverlet) comes from ..\Directory.Build.props -->
+  <ItemGroup>
+    <PackageReference Include="Avalonia.Headless" />
+    <PackageReference Include="Avalonia.Headless.XUnit" />
+    <!-- Skia gives real pixels; the other test projects use headless no-op drawing. -->
+    <PackageReference Include="Avalonia.Skia" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\KinoshitaProductions.BooruNav\KinoshitaProductions.BooruNav.csproj" />
+  </ItemGroup>
+
+  <!-- Default output location for generated PNGs (repo-root /artifacts, already gitignored).
+       Override at runtime with the SCREENSHOT_OUTPUT_DIR environment variable. -->
+  <ItemGroup>
+    <AssemblyAttribute Include="System.Reflection.AssemblyMetadataAttribute">
+      <_Parameter1>ScreenshotOutputDir</_Parameter1>
+      <_Parameter2>$(MSBuildProjectDirectory)/../artifacts/screenshots</_Parameter2>
+    </AssemblyAttribute>
+  </ItemGroup>
+
+</Project>
