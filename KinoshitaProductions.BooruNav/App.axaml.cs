@@ -3,6 +3,7 @@ using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
 using CommunityToolkit.Mvvm.Messaging;
+using KinoshitaProductions.BooruNav.Localization;
 using KinoshitaProductions.BooruNav.Presentation;
 using KinoshitaProductions.BooruNav.ViewModels;
 using KinoshitaProductions.BooruNav.Views;
@@ -63,6 +64,7 @@ public partial class App : Application
         services.AddSingleton<IViewportService, ViewportService>();
         services.AddSingleton<IThemeService, ThemeService>();
         services.AddSingleton<IAppState, AppState>();
+        services.AddSingleton<ILocalizationService>(LocalizationService.Instance);
 
         services.AddSingleton<ShellViewModel>();
         services.AddTransient<SplashViewModel>();

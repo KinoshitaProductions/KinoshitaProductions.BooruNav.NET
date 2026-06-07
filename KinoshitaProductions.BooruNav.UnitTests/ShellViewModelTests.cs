@@ -1,9 +1,11 @@
 using System;
 using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.Messaging;
+using KinoshitaProductions.BooruNav.Localization;
 using KinoshitaProductions.BooruNav.Presentation;
 using KinoshitaProductions.BooruNav.ViewModels;
 using Microsoft.Extensions.DependencyInjection;
+using NSubstitute;
 using Shouldly;
 using Xunit;
 
@@ -19,6 +21,7 @@ public class ShellViewModelTests
         var services = new ServiceCollection();
         services.AddSingleton<IMessenger>(messenger);
         services.AddSingleton<IAppState>(state);
+        services.AddSingleton(Substitute.For<ILocalizationService>());
         services.AddTransient<SplashViewModel>();
         services.AddTransient<WelcomeViewModel>();
         services.AddTransient<MainViewModel>();

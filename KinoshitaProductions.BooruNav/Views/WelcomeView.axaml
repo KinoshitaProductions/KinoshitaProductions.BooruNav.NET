@@ -1,19 +1,21 @@
 <UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:vm="using:KinoshitaProductions.BooruNav.ViewModels"
+             xmlns:i18n="using:KinoshitaProductions.BooruNav.Localization"
+             xmlns:glob="using:System.Globalization"
              x:Class="KinoshitaProductions.BooruNav.Views.WelcomeView"
              x:DataType="vm:WelcomeViewModel">
-    <!-- No Design.DataContext: WelcomeViewModel takes IMessenger; x:DataType drives bindings. -->
+    <!-- No Design.DataContext: WelcomeViewModel takes DI deps; x:DataType drives bindings. -->
     <DockPanel Margin="24">
         <!-- Footer: Skip · step label · Back · Next/Get-started -->
         <Grid DockPanel.Dock="Bottom" ColumnDefinitions="Auto,*,Auto,Auto" Margin="0,16,0,0">
-            <Button Grid.Column="0" Content="Skip" Command="{Binding SkipCommand}"/>
+            <Button Grid.Column="0" Content="{i18n:Translate Welcome_Skip}" Command="{Binding SkipCommand}"/>
             <TextBlock Grid.Column="1" Text="{Binding StepLabel}"
                        HorizontalAlignment="Center" VerticalAlignment="Center" Opacity="0.7"/>
-            <Button Grid.Column="2" Content="Back" Command="{Binding BackCommand}" Margin="0,0,8,0"/>
-            <Button Grid.Column="3" Content="Next" Command="{Binding NextCommand}"
+            <Button Grid.Column="2" Content="{i18n:Translate Welcome_Back}" Command="{Binding BackCommand}" Margin="0,0,8,0"/>
+            <Button Grid.Column="3" Content="{i18n:Translate Welcome_Next}" Command="{Binding NextCommand}"
                     IsVisible="{Binding !IsLastStep}"/>
-            <Button Grid.Column="3" Content="Get started" Classes="accent"
+            <Button Grid.Column="3" Content="{i18n:Translate Welcome_Finish}" Classes="accent"
                     Command="{Binding FinishCommand}" IsVisible="{Binding IsLastStep}"/>
         </Grid>
 
@@ -22,19 +24,29 @@
                 <PageSlide Duration="0:0:0.25" Orientation="Horizontal"/>
             </Carousel.PageTransition>
 
+            <!-- Step 1: title + language chooser -->
             <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Spacing="10">
-                <TextBlock Text="Welcome to BooruNav" FontSize="24" FontWeight="Bold" HorizontalAlignment="Center"/>
-                <TextBlock Text="Browse and navigate boorus with ease." Opacity="0.8" HorizontalAlignment="Center"/>
+                <StackPanel Orientation="Horizontal" Spacing="12" HorizontalAlignment="Center">
+                    <TextBlock Text="{i18n:Translate Welcome_Title}" FontSize="24" FontWeight="Bold" VerticalAlignment="Center"/>
+                    <ComboBox ItemsSource="{Binding Languages}" SelectedItem="{Binding SelectedLanguage}" VerticalAlignment="Center">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate x:DataType="glob:CultureInfo">
+                                <TextBlock Text="{Binding NativeName}"/>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+                </StackPanel>
+                <TextBlock Text="{i18n:Translate Welcome_Subtitle}" Opacity="0.8" HorizontalAlignment="Center"/>
             </StackPanel>
 
             <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Spacing="10">
-                <TextBlock Text="Your way" FontSize="24" FontWeight="Bold" HorizontalAlignment="Center"/>
-                <TextBlock Text="Pick a theme and layout that suits you." Opacity="0.8" HorizontalAlignment="Center"/>
+                <TextBlock Text="{i18n:Translate Welcome_Step2_Title}" FontSize="24" FontWeight="Bold" HorizontalAlignment="Center"/>
+                <TextBlock Text="{i18n:Translate Welcome_Step2_Subtitle}" Opacity="0.8" HorizontalAlignment="Center"/>
             </StackPanel>
 
             <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Spacing="10">
-                <TextBlock Text="All set" FontSize="24" FontWeight="Bold" HorizontalAlignment="Center"/>
-                <TextBlock Text="You're ready to go." Opacity="0.8" HorizontalAlignment="Center"/>
+                <TextBlock Text="{i18n:Translate Welcome_Step3_Title}" FontSize="24" FontWeight="Bold" HorizontalAlignment="Center"/>
+                <TextBlock Text="{i18n:Translate Welcome_Step3_Subtitle}" Opacity="0.8" HorizontalAlignment="Center"/>
             </StackPanel>
         </Carousel>
     </DockPanel>

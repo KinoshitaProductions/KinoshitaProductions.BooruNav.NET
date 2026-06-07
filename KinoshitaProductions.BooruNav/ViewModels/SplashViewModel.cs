@@ -1,9 +1,6 @@
-using CommunityToolkit.Mvvm.ComponentModel;
-
 namespace KinoshitaProductions.BooruNav.ViewModels;
 
-public partial class SplashViewModel : ViewModelBase
+/// <summary>Splash page. Text is localized in the view via <c>{i18n:Translate}</c>.</summary>
+public sealed class SplashViewModel : ViewModelBase
 {
-    [ObservableProperty]
-    private string _message = "Loading…";
 }
