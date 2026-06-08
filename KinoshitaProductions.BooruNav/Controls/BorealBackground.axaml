@@ -54,33 +54,4 @@
         </Style.Animations>
     </Style>
 
-    <Style Selector="controls|BorealBackground > Rectangle.beam2">
-        <Style.Animations>
-            <Animation Duration="0:0:38" IterationCount="INFINITE" Easing="SineEaseInOut">
-                <KeyFrame Cue="0%"><Setter Property="TranslateTransform.X" Value="-30"/></KeyFrame>
-                <KeyFrame Cue="50%"><Setter Property="TranslateTransform.X" Value="44"/></KeyFrame>
-                <KeyFrame Cue="100%"><Setter Property="TranslateTransform.X" Value="-30"/></KeyFrame>
-            </Animation>
-            <Animation Duration="0:0:11" IterationCount="INFINITE" Easing="SineEaseInOut">
-                <KeyFrame Cue="0%"><Setter Property="Opacity" Value="0.86"/></KeyFrame>
-                <KeyFrame Cue="50%"><Setter Property="Opacity" Value="1.0"/></KeyFrame>
-                <KeyFrame Cue="100%"><Setter Property="Opacity" Value="0.86"/></KeyFrame>
-            </Animation>
-        </Style.Animations>
-    </Style>
-
-    <Style Selector="controls|BorealBackground > Rectangle.beam3">
-        <Style.Animations>
-            <Animation Duration="0:0:46" IterationCount="INFINITE" Easing="SineEaseInOut">
-                <KeyFrame Cue="0%"><Setter Property="TranslateTransform.X" Value="34"/></KeyFrame>
-                <KeyFrame Cue="50%"><Setter Property="TranslateTransform.X" Value="-40"/></KeyFrame>
-                <KeyFrame Cue="100%"><Setter Property="TranslateTransform.X" Value="34"/></KeyFrame>
-            </Animation>
-            <Animation Duration="0:0:7" IterationCount="INFINITE" Easing="SineEaseInOut">
-                <KeyFrame Cue="0%"><Setter Property="Opacity" Value="1.0"/></KeyFrame>
-                <KeyFrame Cue="50%"><Setter Property="Opacity" Value="0.78"/></KeyFrame>
-                <KeyFrame Cue="100%"><Setter Property="Opacity" Value="1.0"/></KeyFrame>
-            </Animation>
-        </Style.Animations>
-    </Style>
 </Styles>
