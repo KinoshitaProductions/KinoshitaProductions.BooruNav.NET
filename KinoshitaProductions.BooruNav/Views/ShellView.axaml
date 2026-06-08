@@ -7,15 +7,22 @@
     <!-- No Design.DataContext: ShellViewModel has DI-only constructor deps; x:DataType drives bindings. -->
     <Panel>
         <!-- Shared backdrop gradient; persists across splash → welcome → main transitions. -->
-     
-        <controls:BorealBackground Accent="#ff2d9c" TopSpacing="0.4">
-            <controls:BorealBackground.Background>
+        <Rectangle Margin="0,86,0,0">
+            <Rectangle.Fill>
                 <LinearGradientBrush StartPoint="0%,0%" EndPoint="100%,100%">
                     <GradientStop Offset="0" Color="#FF141212"/>
-                    <GradientStop Offset="1" Color="#FF3C1329"/>
+                    <GradientStop Offset="1" Color="#FF8C1E59"/>
                 </LinearGradientBrush>
+            </Rectangle.Fill>
+        </Rectangle>
+        
+        <!--
+        <controls:BorealBackground Accent="#ff2d9c" TopSpacing="0.4">
+            <controls:BorealBackground.Background>
+             
             </controls:BorealBackground.Background>
         </controls:BorealBackground>
+        -->
         <TransitioningContentControl Content="{Binding Current}"/>
     </Panel>
 </UserControl>

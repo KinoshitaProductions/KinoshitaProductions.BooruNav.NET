@@ -27,9 +27,12 @@
     
     <Style Selector="controls|TitleBar" >
         <Setter Property="Background" Value="{DynamicResource TitleBarBackground}"/>
-        <Setter Property="Height" Value="120"/>
+        <Setter Property="Height" Value="86"/>
         <Setter Property="Template">
             <ControlTemplate>
+                <!--
+                <Border BorderThickness="0,0,0,3" BorderBrush="#bbff2d9c">
+                -->
                 <Grid ColumnDefinitions="*,Auto" Background="{TemplateBinding Background}">
                     <!-- Draggable region. Transparent (not null) so it stays hit-testable. -->
                     <Panel Grid.Column="0" Name="PART_DragArea" Background="Transparent" Margin="16,32,0,0">
