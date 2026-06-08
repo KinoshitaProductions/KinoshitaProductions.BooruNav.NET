@@ -1,0 +1,86 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="using:KinoshitaProductions.BooruNav.Controls">
+
+    <Styles.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.ThemeDictionaries>
+                <ResourceDictionary x:Key="Light">
+                    <Color x:Key="BorealAccent">#1FB890</Color>
+                </ResourceDictionary>
+                <ResourceDictionary x:Key="Dark">
+                    <Color x:Key="BorealAccent">#45E0B0</Color>
+                </ResourceDictionary>
+            </ResourceDictionary.ThemeDictionaries>
+        </ResourceDictionary>
+    </Styles.Resources>
+
+    <!-- Theme-aware default accent; instances can override inline. -->
+    <Style Selector="controls|BorealBackground">
+        <Setter Property="Accent" Value="{DynamicResource BorealAccent}"/>
+    </Style>
+
+    <!-- Each beam: a slow horizontal sway plus a gentle opacity shimmer, on non-divisible
+         durations so the aurora never visibly repeats. 0% == 100% keyframes loop seamlessly;
+         SineEaseInOut zeroes velocity at the turnaround. Animating TranslateTransform.X (a double
+         animator) since Avalonia has no animator for RenderTransform itself. -->
+    <Style Selector="controls|BorealBackground > Rectangle.beam0">
+        <Style.Animations>
+            <Animation Duration="0:0:24" IterationCount="INFINITE" Easing="SineEaseInOut">
+                <KeyFrame Cue="0%"><Setter Property="TranslateTransform.X" Value="-42"/></KeyFrame>
+                <KeyFrame Cue="50%"><Setter Property="TranslateTransform.X" Value="34"/></KeyFrame>
+                <KeyFrame Cue="100%"><Setter Property="TranslateTransform.X" Value="-42"/></KeyFrame>
+            </Animation>
+            <Animation Duration="0:0:9" IterationCount="INFINITE" Easing="SineEaseInOut">
+                <KeyFrame Cue="0%"><Setter Property="Opacity" Value="0.82"/></KeyFrame>
+                <KeyFrame Cue="50%"><Setter Property="Opacity" Value="1.0"/></KeyFrame>
+                <KeyFrame Cue="100%"><Setter Property="Opacity" Value="0.82"/></KeyFrame>
+            </Animation>
+        </Style.Animations>
+    </Style>
+
+    <Style Selector="controls|BorealBackground > Rectangle.beam1">
+        <Style.Animations>
+            <Animation Duration="0:0:31" IterationCount="INFINITE" Easing="SineEaseInOut">
+                <KeyFrame Cue="0%"><Setter Property="TranslateTransform.X" Value="38"/></KeyFrame>
+                <KeyFrame Cue="50%"><Setter Property="TranslateTransform.X" Value="-36"/></KeyFrame>
+                <KeyFrame Cue="100%"><Setter Property="TranslateTransform.X" Value="38"/></KeyFrame>
+            </Animation>
+            <Animation Duration="0:0:13" IterationCount="INFINITE" Easing="SineEaseInOut">
+                <KeyFrame Cue="0%"><Setter Property="Opacity" Value="1.0"/></KeyFrame>
+                <KeyFrame Cue="50%"><Setter Property="Opacity" Value="0.8"/></KeyFrame>
+                <KeyFrame Cue="100%"><Setter Property="Opacity" Value="1.0"/></KeyFrame>
+            </Animation>
+        </Style.Animations>
+    </Style>
+
+    <Style Selector="controls|BorealBackground > Rectangle.beam2">
+        <Style.Animations>
+            <Animation Duration="0:0:38" IterationCount="INFINITE" Easing="SineEaseInOut">
+                <KeyFrame Cue="0%"><Setter Property="TranslateTransform.X" Value="-30"/></KeyFrame>
+                <KeyFrame Cue="50%"><Setter Property="TranslateTransform.X" Value="44"/></KeyFrame>
+                <KeyFrame Cue="100%"><Setter Property="TranslateTransform.X" Value="-30"/></KeyFrame>
+            </Animation>
+            <Animation Duration="0:0:11" IterationCount="INFINITE" Easing="SineEaseInOut">
+                <KeyFrame Cue="0%"><Setter Property="Opacity" Value="0.86"/></KeyFrame>
+                <KeyFrame Cue="50%"><Setter Property="Opacity" Value="1.0"/></KeyFrame>
+                <KeyFrame Cue="100%"><Setter Property="Opacity" Value="0.86"/></KeyFrame>
+            </Animation>
+        </Style.Animations>
+    </Style>
+
+    <Style Selector="controls|BorealBackground > Rectangle.beam3">
+        <Style.Animations>
+            <Animation Duration="0:0:46" IterationCount="INFINITE" Easing="SineEaseInOut">
+                <KeyFrame Cue="0%"><Setter Property="TranslateTransform.X" Value="34"/></KeyFrame>
+                <KeyFrame Cue="50%"><Setter Property="TranslateTransform.X" Value="-40"/></KeyFrame>
+                <KeyFrame Cue="100%"><Setter Property="TranslateTransform.X" Value="34"/></KeyFrame>
+            </Animation>
+            <Animation Duration="0:0:7" IterationCount="INFINITE" Easing="SineEaseInOut">
+                <KeyFrame Cue="0%"><Setter Property="Opacity" Value="1.0"/></KeyFrame>
+                <KeyFrame Cue="50%"><Setter Property="Opacity" Value="0.78"/></KeyFrame>
+                <KeyFrame Cue="100%"><Setter Property="Opacity" Value="1.0"/></KeyFrame>
+            </Animation>
+        </Style.Animations>
+    </Style>
+</Styles>

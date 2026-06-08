@@ -6,8 +6,16 @@
              x:DataType="vm:ShellViewModel">
     <!-- No Design.DataContext: ShellViewModel has DI-only constructor deps; x:DataType drives bindings. -->
     <Panel>
-        <!-- Shared animated backdrop: persists across splash → welcome → main transitions. -->
-        <controls:GlowBackground/>
+        <!-- Shared backdrop gradient; persists across splash → welcome → main transitions. -->
+     
+        <controls:BorealBackground Accent="#3c1329" Margin="0,120,0,0">
+            <controls:BorealBackground.Background>
+                <LinearGradientBrush StartPoint="0%,0%" EndPoint="100%,100%">
+                    <GradientStop Offset="0" Color="#FF131212"/>
+                    <GradientStop Offset="1" Color="#FF3C1329"/>
+                </LinearGradientBrush>
+            </controls:BorealBackground.Background>
+        </controls:BorealBackground>
         <TransitioningContentControl Content="{Binding Current}"/>
     </Panel>
 </UserControl>
