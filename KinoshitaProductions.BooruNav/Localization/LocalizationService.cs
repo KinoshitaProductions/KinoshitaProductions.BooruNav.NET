@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Resources;
+using Avalonia.Controls;
 using Avalonia.Threading;
 using CommunityToolkit.Mvvm.ComponentModel;
 
@@ -58,7 +59,7 @@ public sealed class LocalizationService : ObservableObject, ILocalizationService
         CurrentLanguage = culture;
         ApplyCulture(culture);
 
-        OnPropertyChanged("Item[]");                 // refresh every {i18n:Translate} binding
+        OnPropertyChanged("Item"); // Avalonia's indexer-change name — refreshes {i18n:Translate}
         OnPropertyChanged(nameof(CurrentLanguage));
     }
 
