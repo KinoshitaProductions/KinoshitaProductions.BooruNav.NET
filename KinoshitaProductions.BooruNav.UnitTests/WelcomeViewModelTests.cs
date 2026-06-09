@@ -1,8 +1,6 @@
 using CommunityToolkit.Mvvm.Messaging;
-using KinoshitaProductions.BooruNav.Localization;
 using KinoshitaProductions.BooruNav.Presentation;
 using KinoshitaProductions.BooruNav.ViewModels;
-using NSubstitute;
 using Shouldly;
 using Xunit;
 
@@ -13,7 +11,7 @@ public class WelcomeViewModelTests
     private static WelcomeViewModel Create(out IMessenger messenger)
     {
         messenger = new WeakReferenceMessenger();
-        return new WelcomeViewModel(messenger, Substitute.For<ILocalizationService>());
+        return new WelcomeViewModel(messenger);
     }
 
     [Fact]

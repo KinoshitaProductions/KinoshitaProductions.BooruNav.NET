@@ -23,8 +23,8 @@ public sealed class LocalizationService : ObservableObject, ILocalizationService
 
     public IReadOnlyList<CultureInfo> AvailableLanguages { get; } = new[]
     {
-        CultureInfo.GetCultureInfo("en"),
-        CultureInfo.GetCultureInfo("es"),
+        CultureInfo.GetCultureInfo("en-US"),
+        CultureInfo.GetCultureInfo("es-MX"),
     };
 
     public CultureInfo CurrentLanguage { get; private set; }

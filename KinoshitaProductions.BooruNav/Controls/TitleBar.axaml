@@ -41,14 +41,8 @@
                                    VerticalAlignment="Top" Margin="12,0" FontSize="24"/>
                     </Panel>
 
-                    <StackPanel Grid.Column="1" Orientation="Vertical"
-                                IsVisible="{TemplateBinding ShowWindowControls}" Margin="0,32,16,0">
-                        <TextBlock Text="Language:" FontSize="16"></TextBlock>
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="🌐🇺🇸" LetterSpacing="4" FontSize="16"></TextBlock>
-                            <TextBlock Text="EN" FontSize="16"></TextBlock>
-                        </StackPanel>
-                    </StackPanel>
+                    <!-- Host-injected widget (e.g. LanguageSelector) — self-contained, brings its own label. -->
+                    <ContentPresenter Grid.Column="1" Content="{TemplateBinding RightContent}" Margin="0,32,16,0"/>
                 </Grid>
             </ControlTemplate>
         </Setter>

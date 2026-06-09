@@ -2,13 +2,16 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:vm="using:KinoshitaProductions.BooruNav.ViewModels"
              xmlns:i18n="using:KinoshitaProductions.BooruNav.Localization"
-             xmlns:glob="using:System.Globalization"
              xmlns:controls="using:KinoshitaProductions.BooruNav.Controls"
              x:Class="KinoshitaProductions.BooruNav.Views.WelcomeView"
              x:DataType="vm:WelcomeViewModel">
     <!-- No Design.DataContext: WelcomeViewModel takes DI deps; x:DataType drives bindings. -->
     <DockPanel>
-        <controls:TitleBar DockPanel.Dock="Top" Title="BooruNav" Margin="0" />
+        <controls:TitleBar DockPanel.Dock="Top" Title="BooruNav" Margin="0">
+            <controls:TitleBar.RightContent>
+                <controls:LanguageSelector/>
+            </controls:TitleBar.RightContent>
+        </controls:TitleBar>
         <!-- Footer: Skip · step label · Back · Next/Get-started -->
         <Grid DockPanel.Dock="Bottom" ColumnDefinitions="Auto,*,Auto,Auto" Margin="0,16,0,0">
             <Button Grid.Column="0" Content="{i18n:Translate Welcome_Skip}" Command="{Binding SkipCommand}"/>
@@ -31,14 +34,7 @@
                 <!-- Custom title bar prototype. For real window chrome, move this to the top of
                      MainWindow and set ExtendClientAreaToDecorationsHint="True" on the Window. -->
                 <StackPanel Orientation="Horizontal" Spacing="12" HorizontalAlignment="Center">
-                    <TextBlock Text="{i18n:Translate Welcome_Title}" FontSize="24" FontWeight="Bold" VerticalAlignment="Center"/>
-                    <ComboBox ItemsSource="{Binding Languages}" SelectedItem="{Binding SelectedLanguage}" VerticalAlignment="Center">
-                        <ComboBox.ItemTemplate>
-                            <DataTemplate x:DataType="glob:CultureInfo">
-                                <TextBlock Text="{Binding NativeName}"/>
-                            </DataTemplate>
-                        </ComboBox.ItemTemplate>
-                    </ComboBox>
+                    <TextBlock Text="{i18n:Translate Welcome_Intro}" FontSize="24" FontWeight="Bold" VerticalAlignment="Center"/>
                 </StackPanel>
                 <TextBlock Text="{i18n:Translate Welcome_Subtitle}" Opacity="0.8" HorizontalAlignment="Center"/>
             </StackPanel>

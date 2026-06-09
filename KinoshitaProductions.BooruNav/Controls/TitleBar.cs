@@ -39,6 +39,16 @@ public class TitleBar : TemplatedControl
         set => SetValue(ShowWindowControlsProperty, value);
     }
 
+    /// <summary>Arbitrary content hosted in the bar (e.g. a LanguageSelector) — decoupled from any VM.</summary>
+    public static readonly StyledProperty<object?> RightContentProperty =
+        AvaloniaProperty.Register<TitleBar, object?>(nameof(RightContent));
+
+    public object? RightContent
+    {
+        get => GetValue(RightContentProperty);
+        set => SetValue(RightContentProperty, value);
+    }
+
     /// <summary>The window this title bar belongs to, or null on single-view platforms.</summary>
     private Window? HostWindow => TopLevel.GetTopLevel(this) as Window;
 

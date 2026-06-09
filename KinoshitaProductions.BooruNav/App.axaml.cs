@@ -71,5 +71,6 @@ public partial class App : Application
         services.AddTransient<WelcomeViewModel>();
         services.AddTransient<MainViewModel>();
         services.AddTransient<DeviceSwitcherViewModel>();
+        services.AddTransient<LanguageSelectorViewModel>();
     }
 }

@@ -16,12 +16,12 @@ public class LocalizationServiceTests
         {
             var loc = new LocalizationService();
 
-            loc.SetLanguage(CultureInfo.GetCultureInfo("en"));
+            loc.SetLanguage(CultureInfo.GetCultureInfo("en-US"));
             loc["Welcome_Finish"].ShouldBe("Get started");
 
-            loc.SetLanguage(CultureInfo.GetCultureInfo("es"));
-            loc["Welcome_Finish"].ShouldBe("Comenzar");          // from the es satellite assembly
-            loc.CurrentLanguage.TwoLetterISOLanguageName.ShouldBe("es");
+            loc.SetLanguage(CultureInfo.GetCultureInfo("es-MX"));
+            loc["Welcome_Finish"].ShouldBe("Comenzar");          // es-MX → es satellite via fallback
+            loc.CurrentLanguage.Name.ShouldBe("es-MX");
         }
         finally
         {
@@ -43,7 +43,7 @@ public class LocalizationServiceTests
     {
         var loc = new LocalizationService();
 
-        loc.AvailableLanguages.Select(c => c.TwoLetterISOLanguageName)
-            .ShouldBe(new[] { "en", "es" });
+        loc.AvailableLanguages.Select(c => c.Name)
+            .ShouldBe(new[] { "en-US", "es-MX" });
     }
 }

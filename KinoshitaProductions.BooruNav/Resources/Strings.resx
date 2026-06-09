@@ -91,4 +91,10 @@
   <data name="Welcome_Finish" xml:space="preserve">
     <value>Get started</value>
   </data>
+  <data name="Welcome_Intro" xml:space="preserve">
+    <value>Welcome to Booru Nav</value>
+  </data>
+  <data name="Welcome_Intro_Hint_Touch" xml:space="preserve">
+    <value>Tap "Next" to get started</value>
+  </data>
 </root>

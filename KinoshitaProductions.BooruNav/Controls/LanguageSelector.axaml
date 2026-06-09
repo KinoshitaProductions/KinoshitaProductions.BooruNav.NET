@@ -1,0 +1,36 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:KinoshitaProductions.BooruNav.ViewModels"
+             x:Class="KinoshitaProductions.BooruNav.Controls.LanguageSelector"
+             x:DataType="vm:LanguageSelectorViewModel">
+    <StackPanel Orientation="Vertical">
+        <TextBlock Text="Language:" FontSize="16"/>
+        <StackPanel Orientation="Horizontal">
+            <ComboBox ItemsSource="{Binding Languages}"
+                      SelectedItem="{Binding SelectedLanguage}"
+                      VerticalAlignment="Center">
+                <ComboBox.SelectionBoxItemTemplate>
+                    <!-- One root per template; flag + code, both derived from the culture.
+                         (LanguageOption also has .Name if you want the native language name.) -->
+                    <DataTemplate x:DataType="vm:LanguageOption">
+                        <StackPanel Orientation="Horizontal" Spacing="6">
+                            <TextBlock Text="🌐" LetterSpacing="4" FontSize="16"/>
+                            <TextBlock Text="{Binding Flag}" LetterSpacing="4" FontSize="16"/>
+                            <TextBlock Text="{Binding Code}" FontSize="16"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ComboBox.SelectionBoxItemTemplate>
+                <ComboBox.ItemTemplate>
+                    <!-- One root per template; flag + code, both derived from the culture.
+                         (LanguageOption also has .Name if you want the native language name.) -->
+                    <DataTemplate x:DataType="vm:LanguageOption">
+                        <StackPanel Orientation="Horizontal" Spacing="6">
+                            <TextBlock Text="{Binding Flag}" LetterSpacing="4" FontSize="16"/>
+                            <TextBlock Text="{Binding Name}" FontSize="16"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+        </StackPanel>
+    </StackPanel>
+</UserControl>
