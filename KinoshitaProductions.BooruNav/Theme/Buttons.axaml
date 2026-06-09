@@ -1,0 +1,59 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!-- Usage: <Button Classes="btn-primary"/> · <Button Classes="btn-secondary"/>.
+         Accent brushes come from App.axaml (AccentBrush / AccentBrushHover / …) and are
+         DynamicResource, so both variants recolour live on theme switch. The state colours are
+         set on the Fluent button's PART_ContentPresenter (overriding Fluent's default hover/pressed). -->
+
+    <!-- PRIMARY: filled with the app accent. -->
+    <Style Selector="Button.btn-primary">
+        <Setter Property="Background" Value="{DynamicResource AccentBackground}"/>
+        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="FontSize" Value="20"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+        <Setter Property="Padding" Value="22,12,22,14"/>
+    </Style>
+    <Style Selector="Button.btn-primary /template/ ContentPresenter#PART_ContentPresenter">
+        <Setter Property="Background" Value="{DynamicResource AccentBackground}"/>
+        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="FontSize" Value="18"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+    </Style>
+    <Style Selector="Button.btn-primary:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+        <Setter Property="Background" Value="{DynamicResource AccentBackgroundHover}"/>
+        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="FontSize" Value="18"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+    </Style>
+    <Style Selector="Button.btn-primary:pressed /template/ ContentPresenter#PART_ContentPresenter">
+        <Setter Property="Background" Value="{DynamicResource AccentBackgroundPressed}"/>
+        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="FontSize" Value="18"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+    </Style>
+
+    <!-- SECONDARY: outlined — accent border + text, subtle accent tint on hover/press. -->
+    <Style Selector="Button.btn-secondary">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Foreground" Value="{DynamicResource AccentBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource AccentBrush}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+    </Style>
+    <Style Selector="Button.btn-secondary /template/ ContentPresenter#PART_ContentPresenter">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource AccentBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource AccentBrush}"/>
+    </Style>
+    <Style Selector="Button.btn-secondary:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+        <Setter Property="Background" Value="{DynamicResource AccentBrushSubtle}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource AccentBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource AccentBrush}"/>
+    </Style>
+    <Style Selector="Button.btn-secondary:pressed /template/ ContentPresenter#PART_ContentPresenter">
+        <Setter Property="Background" Value="{DynamicResource AccentBrushSubtleStrong}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource AccentBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource AccentBrush}"/>
+    </Style>
+</Styles>

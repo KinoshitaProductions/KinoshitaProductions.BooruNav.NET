@@ -36,7 +36,8 @@
                 <StackPanel Orientation="Horizontal" Spacing="12" HorizontalAlignment="Center">
                     <TextBlock Text="{i18n:Translate Welcome_Intro}" FontSize="24" FontWeight="Bold" VerticalAlignment="Center"/>
                 </StackPanel>
-                <TextBlock Text="{i18n:Translate Welcome_Subtitle}" Opacity="0.8" HorizontalAlignment="Center"/>
+                <TextBlock Text="{i18n:Translate Welcome_Intro_Hint_Touch}" Opacity="0.8" HorizontalAlignment="Center"/>
+                <Button HorizontalAlignment="Center" Margin="0,24,0,0" Classes="btn-primary" Content="{i18n:Translate Welcome_Next}" Command="{Binding NextCommand}"/>
             </StackPanel>
 
             <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Spacing="10">

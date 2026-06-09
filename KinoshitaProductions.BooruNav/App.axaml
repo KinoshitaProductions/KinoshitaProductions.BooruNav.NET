@@ -9,10 +9,51 @@
         <local:ViewLocator/>
     </Application.DataTemplates>    
 
+    <Application.Resources>
+        <ResourceDictionary>
+            <!-- App-wide accent palette. Set AccentColor to your brand colour; the rest follow.
+                 Theme-aware (Light/Dark) + DynamicResource, so it recolours on theme switch. -->
+            <ResourceDictionary.ThemeDictionaries>
+                <ResourceDictionary x:Key="Light">
+                    <Color x:Key="AccentColor">#1FB890</Color>
+                    <Color x:Key="AccentColorHover">#1AA681</Color>
+                    <Color x:Key="AccentColorPressed">#16906F</Color>
+                    <Color x:Key="AccentForegroundColor">#FFFFFF</Color>
+                </ResourceDictionary>
+                <ResourceDictionary x:Key="Dark">
+                    <Color x:Key="AccentColor">#45E0B0</Color>
+                    <Color x:Key="AccentColorHover">#5CE9BE</Color>
+                    <Color x:Key="AccentColorPressed">#33C99B</Color>
+                    <Color x:Key="AccentForegroundColor">#0A0A0A</Color>
+                </ResourceDictionary>
+            </ResourceDictionary.ThemeDictionaries>
+            
+            <LinearGradientBrush x:Key="AccentBackgroundHover" StartPoint="0%,0%" EndPoint="100%,100%">
+                <GradientStop Offset="0" Color="#ff5eca"/>
+                <GradientStop Offset="1" Color="#ff4dab"/>
+            </LinearGradientBrush>
+            <LinearGradientBrush x:Key="AccentBackgroundPressed" StartPoint="0%,0%" EndPoint="100%,100%">
+                <GradientStop Offset="0" Color="#d637a2"/>
+                <GradientStop Offset="1" Color="#d62683"/>
+            </LinearGradientBrush>
+            <LinearGradientBrush x:Key="AccentBackground" StartPoint="0%,0%" EndPoint="100%,100%">
+                <GradientStop Offset="0" Color="#ff42c1"/>
+                <GradientStop Offset="1" Color="#ff2d9c"/>
+            </LinearGradientBrush>
+            <SolidColorBrush x:Key="AccentBrush" Color="{DynamicResource AccentColor}"/>
+            <SolidColorBrush x:Key="AccentBrushHover" Color="{DynamicResource AccentColorHover}"/>
+            <SolidColorBrush x:Key="AccentBrushPressed" Color="{DynamicResource AccentColorPressed}"/>
+            <SolidColorBrush x:Key="AccentForegroundBrush" Color="{DynamicResource AccentForegroundColor}"/>
+            <SolidColorBrush x:Key="AccentBrushSubtle" Color="{DynamicResource AccentColor}" Opacity="0.15"/>
+            <SolidColorBrush x:Key="AccentBrushSubtleStrong" Color="{DynamicResource AccentColor}" Opacity="0.30"/>
+        </ResourceDictionary>
+    </Application.Resources>
+
     <Application.Styles>
         <FluentTheme />
         <StyleInclude Source="avares://KinoshitaProductions.BooruNav/Controls/GlowBackground.axaml"/>
         <StyleInclude Source="avares://KinoshitaProductions.BooruNav/Controls/BorealBackground.axaml"/>
         <StyleInclude Source="avares://KinoshitaProductions.BooruNav/Controls/TitleBar.axaml"/>
+        <StyleInclude Source="avares://KinoshitaProductions.BooruNav/Theme/Buttons.axaml"/>
     </Application.Styles>
 </Application>
